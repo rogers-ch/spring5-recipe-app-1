@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by jt on 6/19/17.
+ * Modified by cr on 05/21/2021
  */
 @Slf4j
 @Controller
@@ -72,6 +73,20 @@ public class RecipeController {
         modelAndView.setViewName("404error");
         modelAndView.addObject("exception", exception);
 
+        return modelAndView;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormat(Exception exception){
+
+        log.error("Handling Number Format Exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception", exception);
 
         return modelAndView;
     }

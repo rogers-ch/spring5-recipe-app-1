@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 /**
  * Created by jt on 6/17/17.
+ * Modified by cr on 05/21/2021
  */
 public class RecipeServiceImplTest {
 
@@ -68,6 +69,11 @@ public class RecipeServiceImplTest {
         Recipe recipeReturned = recipeService.findById(1L);
 
         //should go boom
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void getRecipeById_throws_NumberFormatException_when_id_is_not_a_number() throws Exception{
+        recipeService.findById(Long.valueOf("asd"));
     }
 
     @Test
